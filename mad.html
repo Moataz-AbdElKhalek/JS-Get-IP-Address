@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <title>Network IP Address By MAD Labs</title>
+</head><body>
+Your network IP is: <h1 id=list>-</h1> 
+
+Yalla ya 7ag SASA. 3eesh!!
+
+
+
+<script>
+
+//compatibility for Firefox and chrome
+window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+var pc = new RTCPeerConnection({iceServers:[]}), noop = function(){};      
+
+//create a bogus data channel
+pc.createDataChannel('');
+
+// create offer and set local description
+pc.createOffer(pc.setLocalDescription.bind(pc), noop);
+pc.onicecandidate = function(ice)
+{
+ if (ice && ice.candidate && ice.candidate.candidate)
+ {
+  var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
+  console.log('my IP: ', myIP);
+  document.getElementById('list').textContent = myIP;   
+  pc.onicecandidate = noop;
+ }
+};
+
+</script>
+
+</body></html>
