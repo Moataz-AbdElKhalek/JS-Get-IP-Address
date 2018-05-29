@@ -1,5 +1,8 @@
 # JS-Get-IP-Address
 
+
+
+
 ### 1. Local IP Address:
 - To get the Local IP Address of the client, just open the mad.html in the browser..
 - I made this code compatible with Firefox and Chrome
