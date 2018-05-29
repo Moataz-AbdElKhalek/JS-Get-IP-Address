@@ -1,9 +1,12 @@
 <!doctype html>
 <html><head>
     <meta charset="utf-8">
-    <title>Network IP Address By MAD Labs</title>
+    <title>IP By MAD Labs</title>
 </head><body>
-Your network IP is: <h1 id=list>-</h1> 
+Your Local IP is: <h1 id=local>-</h1>
+
+Your Public IP is: <h1 id=public>-</h1>
+    
 
 Yalla ya 7ag SASA. 3eesh!!
 
@@ -26,11 +29,19 @@ pc.onicecandidate = function(ice)
  {
   var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
   console.log('my IP: ', myIP);
-  document.getElementById('list').textContent = myIP;   
+  document.getElementById('local').textContent = myIP;   
   pc.onicecandidate = noop;
  }
 };
 
 </script>
+    
+<script type="application/javascript">
+  function getIP(json) {
+    document.getElementById('public').textContent = json.ip;
+  }
+</script>
+
+<script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
 
 </body></html>
